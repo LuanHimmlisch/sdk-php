@@ -1,9 +1,14 @@
 <?php
+
 namespace MercadoPago;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use MercadoPago\Annotation\Attribute;
+use MercadoPago\Annotation\DenyDynamicAttribute;
+use MercadoPago\Annotation\RequestParam;
+use MercadoPago\Annotation\RestMethod;
 
 /**
  * MetaDataReader Class Doc Comment
@@ -24,15 +29,14 @@ class MetaDataReader
      */
     public function __construct()
     {
-        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/RestMethod.php');
-        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/RequestParam.php');
-        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Attribute.php');
-        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/DenyDynamicAttribute.php');
+        AnnotationRegistry::loadAnnotationClass(RestMethod::class);
+        AnnotationRegistry::loadAnnotationClass(RequestParam::class);
+        AnnotationRegistry::loadAnnotationClass(Attribute::class);
+        AnnotationRegistry::loadAnnotationClass(DenyDynamicAttribute::class);
 
         $this->_reader = new AnnotationReader();
-        
-        return $this;
 
+        return $this;
     }
 
     /**
@@ -42,9 +46,9 @@ class MetaDataReader
      */
     public function getMetaData($entity)
     {
-        if (get_parent_class($entity)){
+        if (get_parent_class($entity)) {
             $result = $this->getMetaData(get_parent_class($entity));
-        }else {
+        } else {
             $result = new \stdClass;
         }
 
