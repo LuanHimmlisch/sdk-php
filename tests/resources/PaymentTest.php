@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class PaymentTest extends TestCase
 {
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         MercadoPago\SDK::cleanCredentials();
         
@@ -229,5 +229,3 @@ class PaymentTest extends TestCase
 
 
 }
-
-?>

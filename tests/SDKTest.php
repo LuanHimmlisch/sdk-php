@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
  *
  * @package MercadoPago
  */
-class ConfigTest extends TestCase                                                                                       
+class ConfigTest extends TestCase
 {
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
 
         MercadoPago\SDK::cleanCredentials();
@@ -23,7 +23,7 @@ class ConfigTest extends TestCase
         }
 
         MercadoPago\SDK::setClientId(getenv('CLIENT_ID'));
-        MercadoPago\SDK::setClientSecret(getenv('CLIENT_SECRET')); 
+        MercadoPago\SDK::setClientSecret(getenv('CLIENT_SECRET'));
     }
 
     /**
@@ -33,18 +33,18 @@ class ConfigTest extends TestCase
     {
         $this->assertEquals(getenv('CLIENT_ID'), MercadoPago\SDK::getClientId());
         $this->assertEquals(getenv('CLIENT_SECRET'), MercadoPago\SDK::getClientSecret());
-
     }
- 
+
     /**
      * @covers                   MercadoPago\SDK
      */
     public function testDoGetToken()
-    { 
+    {
         $this->assertNotNull(MercadoPago\SDK::getAccessToken());
     }
 
-    public function testSetMultipleAT(){
+    public function testSetMultipleAT()
+    {
         MercadoPago\SDK::setMultipleCredentials(
             array(
                 "mla" => "MLA_AT",
@@ -54,5 +54,4 @@ class ConfigTest extends TestCase
         $this->assertNotNull(MercadoPago\SDK::config()->getData()['mla']);
         $this->assertNotNull(MercadoPago\SDK::config()->getData()['mlb']);
     }
-
 }

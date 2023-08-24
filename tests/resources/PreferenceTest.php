@@ -9,7 +9,7 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
 
     private static $last_preference;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (file_exists(__DIR__ . '/../../.env')) {
             $dotenv = new Dotenv\Dotenv(__DIR__, '../../.env');
@@ -45,4 +45,3 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($preference->id, self::$last_preference->id);
     }
 }
-?>

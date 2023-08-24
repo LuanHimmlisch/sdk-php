@@ -12,7 +12,7 @@ class MercadopagoSdkTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         Entity::unSetManager();
     }
@@ -20,7 +20,7 @@ class MercadopagoSdkTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -41,6 +41,4 @@ class MercadopagoSdkTest extends \PHPUnit\Framework\TestCase
         $entity = new DummyEntity();
         $this->assertInstanceOf(DummyEntity::class, $entity);
     }
-
-
 }
